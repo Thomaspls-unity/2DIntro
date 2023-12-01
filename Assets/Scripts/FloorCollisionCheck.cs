@@ -6,8 +6,10 @@ using TMPro;
 public class FloorCollisionCheck : MonoBehaviour
 
 {
+    private int myFail;
     public TMP_Text failTxt;
     public CollisionCheck collisionCheck;
+    public UISetup uiSetup;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,8 @@ public class FloorCollisionCheck : MonoBehaviour
 
     }
 
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ball"))
@@ -30,10 +34,21 @@ public class FloorCollisionCheck : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Bonus"))
         {
-            failTxt.text = "Wow, you missed >:)";
             collisionCheck.UpdateScore(-1);
+            UpdateFail(1);
+            uiSetup.ShowText();
             //collision.gameObject.SetActive(false);
             collisionCheck.SetBonusPosition(collision.transform);
         }
+    }
+
+    public void UpdateFail(int failValue)
+    {
+        myFail += failValue;
+    }
+
+    public int GetFail()
+    { 
+        return myFail;
     }
 }

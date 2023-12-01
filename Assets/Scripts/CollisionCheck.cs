@@ -8,6 +8,8 @@ public class CollisionCheck : MonoBehaviour
     private int myScore;
     public Collider2D spawnTrigger;
     public Collider2D spawnTriggerBonus;
+    public AudioSource cronch;
+    public AudioSource crunch;
 
     // Start is called before the first frame update
     void Start()
@@ -29,12 +31,14 @@ public class CollisionCheck : MonoBehaviour
             UpdateScore(1);
             //collision.gameObject.SetActive(false);
             SetBallPosition(collision.transform);
+            cronch.Play();
         }
         else if (collision.gameObject.CompareTag("Bonus"))
         {
             UpdateScore(5);
             //collision.gameObject.SetActive(false);
             SetBonusPosition(collision.transform);
+            crunch.Play();
         }
 
     }
