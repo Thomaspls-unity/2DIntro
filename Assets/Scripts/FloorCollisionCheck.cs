@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 
 public class FloorCollisionCheck : MonoBehaviour
+
 {
     public TMP_Text failTxt;
     public CollisionCheck collisionCheck;
@@ -24,14 +25,15 @@ public class FloorCollisionCheck : MonoBehaviour
         if (collision.gameObject.CompareTag("Ball"))
         {
             collisionCheck.UpdateScore(-1);
-            collision.gameObject.SetActive(false);
-        }else if (collision.gameObject.CompareTag("Bonus"))
+            //collision.gameObject.SetActive(false);
+            collisionCheck.SetBallPosition(collision.transform);
+        }
+        else if (collision.gameObject.CompareTag("Bonus"))
         {
             failTxt.text = "Wow, you missed >:)";
             collisionCheck.UpdateScore(-1);
-            collision.gameObject.SetActive(false);
+            //collision.gameObject.SetActive(false);
+            collisionCheck.SetBonusPosition(collision.transform);
         }
-    
-
-}
+    }
 }
